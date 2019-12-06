@@ -12,17 +12,12 @@
 
 {{ if .Site.RSSLink }}<link rel="alternate" href="{{ .Site.RSSLink | relLangURL }}" type="application/rss+xml" title="{{ .Site.Title }}"/>{{ end }}
 
-{{ $themeColor := "default" }}
-{{ if .Site.Params.themeColor }}
-    {{ $themeColor = .Site.Params.themeColor }}
-{{ end }}
 
-{{ $cssbootstrap := resources.Get (printf "/css/bootstrap-%s.min.css" $themeColor) }}
-{{ $cssfontawesome := resources.Get "/css/fontawesome-free-5.10.1-web-all.min.css" }}
-{{ $cssmain := resources.Get "/css/main.css" }}
-{{ $csstheme := resources.Get (printf "/css/main-%s.css" $themeColor) }}
-{{ $customcss := resources.Get "/css/custom.css" }}
-{{ $allcss := slice $cssbootstrap $cssfontawesome $cssmain $csstheme $customcss | resources.Concat "/css/vendor.css" | minify | fingerprint "sha512" }}
+{{ $cssbootstrap := resources.Get "/css/bootstrap.min.css" }}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+{{ $cssmdb := resources.Get "/css/mdb.min.css" }}
+{{ $cssstyle := resources.Get "/css/style.css" }}
+{{ $allcss := slice $cssbootstrap $cssmdb | resources.Concat "/css/vendor.css" | minify | fingerprint "sha512" }}
 <link rel="stylesheet" href="{{ $allcss.RelPermalink }}" integrity="{{ $allcss.Data.Integrity }}">
 
 {{- range .Site.Params.csscdn }}
@@ -30,8 +25,7 @@
 {{- end }}
 
 {{- range .Site.Params.css }}
-    {{ $pagestyle := resources.Get . | minify | fingerprint "sha512" }}
-    <link rel="stylesheet" href="{{ $pagestyle.RelPermalink }}" integrity="{{ $pagestyle.Data.Integrity }}">
+    <link rel="stylesheet" href="{{ . }}" integrity="">
 {{- end }}
 
 {{- range .Params.css }}

@@ -1,42 +1,61 @@
-{{ $alwaysExpandMenu := "" }}
-{{ if and (.Site.Params.alwaysExpandMenu) (eq .Site.Params.alwaysExpandMenu true) }}
-    {{ $alwaysExpandMenu = "navbar-expand-lg" }}
-{{ end }}
+<header>
 
-{{ $navClasses := "navbar-light bg-white" }}
-{{ if and (.Site.Params.themeColor) (eq .Site.Params.themeColor "dark") }}
-    {{ $navClasses = "navbar-dark bg-dark" }}
-{{ end }}
-
-<nav class="navbar {{ $navClasses }} {{ $alwaysExpandMenu }} border-bottom">
-    <div class="container">
-        <a class="navbar-brand text-primary" href="{{ "/" | relLangURL }}">{{ .Site.Title }}</a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="navbar-collapse collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                {{ $currentPage := . }}
-                {{ range $index, $element := .Site.Menus.main }}
-                    {{ if .HasChildren }}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-primary" href="#" id="dropdown{{$index}}" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">{{ .Pre }} {{ .Name }}</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown{{$index}}">
-                            {{ range .Children }}
-                                <a class="dropdown-item text-primary" href="{{ .URL }}">{{ .Pre }} {{ .Name }}</a>
-                            {{ end }}
-                            </div>
-                        </li>
-                    {{ else }}
-                        <li class="nav-item">
-                            <a class="nav-link text-primary" href="{{ .URL }}">{{ .Pre }} {{ .Name }}</a>
-                        </li>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light">
+    
+    {{ if .Site.Params.logo }}
+    <!-- Navbar brand  -->
+      <a class="navbar-brand logo" href="{{ .Site.Params.baseURL }}"><img src="{{ .Site.Params.baseURL }}/img/{{ .Site.Params.Navigation.logo }}" alt="{{ .Title }}" title="{{ .Title }}"></a>
+    {{ end }}
+    
+      <!-- Collapse button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="basicExampleNav">
+          <ul class="navbar-nav mr-auto">
+                    {{ $currentPage := . }}
+                    {{ range $index, $element := .Site.Menus.main }}
+                        {{ if .HasChildren }}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-primary" href="#" id="dropdown{{$index}}" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">{{ .Pre }} {{ .Name }}</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown{{$index}}">
+                                {{ range .Children }}
+                                    <a class="dropdown-item text-primary" href="{{ .URL }}">{{ .Pre }} {{ .Name }}</a>
+                                {{ end }}
+                                </div>
+                            </li>
+                        {{ else }}
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" href="{{ .URL }}">{{ .Pre }} {{ .Name }}</a>
+                            </li>
+                        {{ end }}
                     {{ end }}
-                {{ end }}
-            </ul>
+    
+          </ul>
+          <!-- Links -->
+    
+      </div>
+      <!-- Collapsible content -->
+    
+    </nav>
+    <!--/.Navbar-->
+
+    <!--Jumbotron-->
+    <!-- taken from here: 
+        https://stackoverflow.com/questions/51002011/jumbotron-bootstrap-4-image-opacity-but-not-text 
+    -->
+    <div class="jumbotron card card-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{ .Site.Params.baseURL }}/img/banner.jpg);">
+      <div class="text-white text-left py-5 px-4">
+        <div class="py-5">
+          <h1 class="pt-3 mb-3 font-bold"><strong>{{ .Site.Params.Banner.title }}</strong></h1>
+          <p class="subtitle mb-5">{{ .Site.Params.Banner.subtitle }}          </p>
         </div>
+      </div>
     </div>
-</nav>
+    <!--./Jumbotron-->
+</header>
