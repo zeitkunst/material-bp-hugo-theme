@@ -1,0 +1,19 @@
+<div class="container my-5 p-5 z-depth-1">
+    <section class="text-center dark-grey-text">
+        <h2 class="font-weight-bold mb-2 pb-2">Updates</h2>
+    </section>
+
+    {{ $pages := where .Site.Pages "Type" "news" }}
+    {{ $pages := $pages | intersect (where .Site.Pages "Params.title" "!=" nil) }}
+    {{ range $pages.ByParam "lastmod" }}
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <p class="grey-text mb-md-0">{{ .Content }}</p>
+            <p class="grey-text">{{ .Params.lastmod }} </p>
+        </div>
+    </div>
+
+    {{ end }}
+</div>
+

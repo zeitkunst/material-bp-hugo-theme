@@ -1,46 +1,28 @@
 {{ define "main" }}
 
-<!--Card-->
-<div class="card m-5" style="width: 22rem;">
+{{- partial "updates.html" . -}}
 
-  <!--Card image-->
-  <div class="view overlay">
-    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%287%29.jpg" class="img-fluid" alt="">
-    <a href="#">
-      <div class="mask rgba-white-slight"></div>
-    </a>
-  </div>
-
-  <!--Card content-->
-  <div class="card-body">
-    <!--Title-->
-    <h4 class="card-title">Card title</h4>
-    <!--Text-->
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-      content.</p>
-    <a href="#" class="btn btn-primary">Button</a>
-  </div>
-
-</div>
-<!--/.Card-->
-
-<div class="container mt-3 mb-3">
-    {{ $paginator := .Paginate ( where .Site.RegularPages.ByPublishDate.Reverse "Type" "!=" "page") }}
-    {{ if .Site.Params.startPageColumns }}
-        <div class="card-columns">
-            {{ range $paginator.Pages }}
-                {{- partial "content_index.html" . -}}
-            {{ end }}
-        </div>
-    {{ else }}
-        {{ range $paginator.Pages }}
-            <div class="mb-3">
-                {{- partial "content_index.html" . -}}
+<div class="container-fluid">
+    {{ $pages := where .Site.Pages "Type" "projects" }}
+    {{ $pages := $pages | intersect (where .Site.Pages "Params.title" "!=" nil) }}
+    {{ range $pages.ByParam "lastmod" }}
+    <div class="row">
+        <div class="col-12 col-md-4 col-lg-6 no-padding">
+            <div class="portfolio-content">
+                <figure>
+                    {{ range first 1 (.Resources.Match "images/*.png") }}
+                    <img class="img-fluid" src="{{ .RelPermalink }}" alt="{{ .Title }}" />
+                    {{ end }}
+                </figure>
+                <div class="entry-content d-flex flex-column align-items-center justify-content-center rgba-white-strong">
+                    <h3><a href="{{ .RelPermalink }} " class="link">{{ .Title }}</a></h3>
+                    <p class="grey-text">{{ .Params.tagline }}</p>
+                </div>
             </div>
-        {{ end }}
+        </div>
+    </div>
     {{ end }}
-
-    {{ template "_internal/pagination.html" . }}
 </div>
+
 
 {{ end }}
