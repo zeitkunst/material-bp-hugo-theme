@@ -1,37 +1,32 @@
-<footer class="navbar-light border-top">
+{{ "<!-- Footer -->" | safeHTML}}
+<footer id="footer" class="page-footer font-small blue-grey lighten-2">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-3 mb-3">
-                <h5>{{ .Site.Title }}</h5>
-                {{ .Site.Params.description }}
+            <div class="col-12 col-md-4 py-5">
+                <div class="d-flex justify-content-center align-items-center">
+                    <a class="navbar-brand logo" href="{{ .Site.Params.baseURL }}"><img src="{{ .Site.Params.baseURL }}/img/{{ .Site.Params.Navigation.logo }}" alt="{{ .Title }}" title="{{ .Title }}"></a>
+                </div>
             </div>
-            <div class="col-12 col-md-3 mb-3">
-                <h5>{{ i18n "social" }}</h5>
-                <ul class="list-unstyled list-inline">
-                    {{- partial "social.html" . -}}
-                </ul>
-            </div>
-            <div class="col-12 col-md-3 mb-3">
-                <h5>{{ i18n "site" }}</h5>
-                <ul class="list-unstyled">
-                    {{ range $index, $element := .Site.Menus.footer }}
-                        {{ if .HasChildren }}
-                            <li><a href="{{ .URL }}">{{ .Pre }} {{ .Name }}</a></li>
-                            {{ range .Children }}
-                                <li><a href="{{ .URL }}">{{ .Pre }} {{ .Name }}</a></li>
-                            {{ end }}
-                        {{ else }}
-                            <li><a href="{{ .URL }}">{{ .Pre }} {{ .Name }}</a></li>
-                        {{ end }}
-                    {{ end }}
-                </ul>
-            </div>
-            <div class="col-12 col-md-3 mb-3">
-                {{ partial "i18nlist.html" . }}
 
-                &copy; {{ now.Format "2006" }} {{ range .Site.Author }}{{ . }}{{ end }}<br/>
-                {{ i18n "themeby" }} <a href="https://www.spech.de" target="_blank" rel="noopener noreferrer">Sebastian Pech</a>.
+            <div class="col-12 col-md-4 py-5">
+                <div class="d-flex justify-content-center align-items-center">
+                    {{ range .Site.Params.footer.social }}
+                    <a class="" title="{{ .label }}" href="{{ .url | safeHTML }}">
+                            <span class="fab {{ .icon }} fa-lg black-text mr-md-5 mr-3 fa-2x"></span>
+                        </a>
+                    {{ end }}
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4 py-5">
+                <div class="d-flex justify-content-center align-items-center">
+                    <p>&copy;2019, <a class="font-bold" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC-NA-SA-4.0</a>, {{ .Site.Params.footer.copyright }}</p>
+                    {{ range .Site.Params.footer.quicklinks}}
+                        <p>{{ .text }} <a href="{{ .url | safeHTML }}">{{ .alt }}</a></p>
+                    {{ end }}
+                </div>
             </div>
         </div>
+
     </div>
 </footer>

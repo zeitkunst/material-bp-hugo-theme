@@ -1,11 +1,11 @@
 <header>
 
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar fixed-top scrolling-navbar navbar-expand-lg navbar-light blue lighten-5">
     
     {{ if .Site.Params.logo }}
     <!-- Navbar brand  -->
-      <a class="navbar-brand logo" href="{{ .Site.Params.baseURL }}"><img src="{{ .Site.Params.baseURL }}/img/{{ .Site.Params.Navigation.logo }}" alt="{{ .Title }}" title="{{ .Title }}"></a>
+      <a class="navbar-brand logo" href="/"><img src="{{ .Site.Params.baseURL }}/img/{{ .Site.Params.Navigation.logo }}" alt="{{ .Title }}" title="{{ .Title }}"></a>
     {{ end }}
     
       <!-- Collapse button -->
@@ -31,7 +31,7 @@
                             </li>
                         {{ else }}
                             <li class="nav-item">
-                                <a class="nav-link text-primary" href="{{ .URL }}">{{ .Pre }} {{ .Name }}</a>
+                                <a class="nav-link font-bold" href="{{ .URL }}">{{ .Pre }} {{ .Name }}</a>
                             </li>
                         {{ end }}
                     {{ end }}
@@ -49,7 +49,7 @@
     <!-- taken from here: 
         https://stackoverflow.com/questions/51002011/jumbotron-bootstrap-4-image-opacity-but-not-text 
     -->
-    <div class="jumbotron card card-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{ .Site.Params.baseURL }}/img/banner.jpg);">
+    <div class="jumbotron card card-image my-5" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{ .Site.Params.baseURL }}/img/banner.jpg);">
       <div class="text-white text-left py-5 px-4">
         <div class="py-5">
           <h1 class="pt-3 mb-3 font-bold"><strong>{{ .Site.Params.Banner.title }}</strong></h1>

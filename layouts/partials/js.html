@@ -2,9 +2,13 @@
 {{ $popper := resources.Get "/js/popper.min.js" }}
 {{ $bootstrap := resources.Get "/js/bootstrap.min.js" }}
 {{ $mdb := resources.Get "/js/mdb.min.js" }}
-{{ $allscript := slice $jquery $popper $bootstrap $mdb | resources.Concat "/js/vendor.js" | minify | fingerprint "sha512" }}
+{{ $wowjs := resources.Get "/js/modules/wow.min.js" }}
+{{ $allscript := slice $jquery $popper $bootstrap $mdb $wowjs | resources.Concat "/js/vendor.js" | minify | fingerprint "sha512" }}
 <script src="{{ $allscript.RelPermalink }}" integrity="{{ $allscript.Data.Integrity }}"></script>
 
+    <script>
+        new WOW().init();
+    </script>
 
 {{- range .Site.Params.js }}
     {{ $pagescript := resources.Get . | minify | fingerprint "sha512" }}

@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-4 mb-4">
             <p class="grey-text mb-md-0">{{ .Content }}</p>
-            <p class="grey-text">{{ .Params.lastmod }} </p>
+            <p class="grey-text">{{ dateFormat "Monday, 2 January 2006" .Params.lastmod }} at {{ dateFormat "15:04:05" .Params.lastmod }}</p>
         </div>
     </div>
 

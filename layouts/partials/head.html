@@ -17,7 +17,8 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 {{ $cssmdb := resources.Get "/css/mdb.min.css" }}
 {{ $cssstyle := resources.Get "/css/style.css" }}
-{{ $allcss := slice $cssbootstrap $cssmdb | resources.Concat "/css/vendor.css" | minify | fingerprint "sha512" }}
+{{ $cssanimate := resources.Get "/css/modules/animations-extended.min.css" }}
+{{ $allcss := slice $cssbootstrap $cssmdb $cssanimate | resources.Concat "/css/vendor.css" | minify | fingerprint "sha512" }}
 <link rel="stylesheet" href="{{ $allcss.RelPermalink }}" integrity="{{ $allcss.Data.Integrity }}">
 
 {{- range .Site.Params.csscdn }}
