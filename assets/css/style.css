@@ -18,3 +18,14 @@ li.nav-item a {
 header div.jumbotron h1 {
     border-bottom: solid 3px #fff;
 }
+
+.updates-title {
+    font-family: "PT Sans", sans-serif;
+}
+
+
+.updates-date {
+    font-family: "PT Sans", sans-serif;
+    font-weight: bold;
+}
+
