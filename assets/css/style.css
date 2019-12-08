@@ -1,6 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,600,600italic");
 
+body {
+  font-family: 'Montserrat', sans-serif;
+  min-height: 75rem;
+  padding-top: 4.5rem;
+}
+
 li.nav-item a {
+    font-family: "PT Sans", "Source Sans Pro", sans-serif;
     text-transform: uppercase;
 }
 
