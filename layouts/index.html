@@ -4,13 +4,13 @@
 
 <hr class="extra-margins">
 
-<div class="container p-5">
+<div class="container p-5 wow fadeIn">
     <section class="text-center dark-grey-text">
         <h1 class="font-weight-bold mb-2 pb-2">Work</h1>
     </section>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid wow fadeIn">
     {{ $pages := where .Site.Pages "Type" "projects" }}
     {{ $pages := $pages | intersect (where .Site.Pages "Params.title" "!=" nil) }}
     {{ range $pages.ByParam "lastmod" }}

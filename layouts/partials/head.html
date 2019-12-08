@@ -13,12 +13,15 @@
 {{ if .Site.RSSLink }}<link rel="alternate" href="{{ .Site.RSSLink | relLangURL }}" type="application/rss+xml" title="{{ .Site.Title }}"/>{{ end }}
 
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 {{ $cssbootstrap := resources.Get "/css/bootstrap.min.css" }}
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 {{ $cssmdb := resources.Get "/css/mdb.min.css" }}
 {{ $cssstyle := resources.Get "/css/style.css" }}
 {{ $allcss := slice $cssbootstrap $cssmdb $cssstyle | resources.Concat "/css/vendor.css" | minify | fingerprint "sha512" }}
-<link rel="stylesheet" href="{{ $allcss.RelPermalink }}" integrity="{{ $allcss.Data.Integrity }}">
+<!--<link rel="stylesheet" href="{{ $allcss.RelPermalink }}" integrity="{{ $allcss.Data.Integrity }}">-->
+<link rel="stylesheet" href="{{ $cssbootstrap.RelPermalink }}" >
+<link rel="stylesheet" href="{{ $cssmdb.RelPermalink }}">
+<link rel="stylesheet" href="{{ $cssstyle.RelPermalink }}">
 
 {{- range .Site.Params.csscdn }}
     <link rel="stylesheet" href="{{ . }}">

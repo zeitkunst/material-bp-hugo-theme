@@ -4,7 +4,11 @@
 {{ $mdb := resources.Get "/js/mdb.min.js" }}
 {{ $wowjs := resources.Get "/js/modules/wow.min.js" }}
 {{ $allscript := slice $jquery $popper $bootstrap $mdb $wowjs | resources.Concat "/js/vendor.js" | minify | fingerprint "sha512" }}
-<script src="{{ $allscript.RelPermalink }}" integrity="{{ $allscript.Data.Integrity }}"></script>
+<!--<script src="{{ $allscript.RelPermalink }}" integrity="{{ $allscript.Data.Integrity }}"></script>-->
+<script src="{{ $jquery.RelPermalink }}"></script>
+<script src="{{ $popper.RelPermalink }}"></script>
+<script src="{{ $bootstrap.RelPermalink }}"></script>
+<script src="{{ $mdb.RelPermalink }}"></script>
 
     <script>
         new WOW().init();
