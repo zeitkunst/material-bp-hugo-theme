@@ -20,7 +20,7 @@
 
             <div class="col-12 col-md-4 py-5">
                 <div class="d-flex justify-content-center align-items-center">
-                    <p>&copy;2019, <a class="font-bold" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC-NA-SA-4.0</a>, {{ .Site.Params.footer.copyright }}</p>
+                    <p>{{ .Site.Params.footer.year }}, <a class="font-bold" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC-NA-SA-4.0</a>, {{ .Site.Params.footer.copyright }}</p>
                     {{ range .Site.Params.footer.quicklinks}}
                         <p>{{ .text }} <a href="{{ .url | safeHTML }}">{{ .alt }}</a></p>
                     {{ end }}
