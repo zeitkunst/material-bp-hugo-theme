@@ -13,7 +13,7 @@
 <div class="container-fluid wow fadeIn">
     {{ $pages := where .Site.Pages "Type" "projects" }}
     {{ $pages := $pages | intersect (where .Site.Pages "Params.title" "!=" nil) }}
-    {{ range $pages.ByParam "lastmod" }}
+    {{ range ($pages.ByParam "lastmod").Reverse }}
     <div class="row">
         <div class="col-12 col-md-4 col-lg-6 no-padding">
             <div class="portfolio-content">
